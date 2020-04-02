@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<title>
+			MyHive
+		</title>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="mystyle.css">
+	</head>
+	<body>
+		<div id="demo2_viewport">
+ 			<div id="demo2_wall"></div>
+		</div>
+		<div id="logo"></div>
+		<div id="panel">
+			
+			<div id="close"></div>
+		</div>
+	</body>
+	<script src="jquery.infinitedrag.js"></script>
+	<script type="text/javascript">
+	  $(document).ready(function() {
+	    /* //allows editing of position marker
+	    var edit = function($element) {
+	      // Create the text input.
+	      var text = $element.text();
+	      $input = $('<input type="text" />').val(text);
+	      
+	      // Create the from.
+	      $editor = $("<form></form>").
+	        append($input).
+	        appendTo($element.empty());
+	        
+	      // Focus on the input.
+	      $input.focus();
+	      
+	      var save = function () {
+	        var val = $editor.children("input").val();
+	        $element.html(val);
+	        return false;
+	      }
+	      
+	      $input.blur(save);
+	      $editor.submit(save);
+	    };
+	    */
+	    var tile_options = {
+	      width: 300,
+	      height: 300,
+	      start_col: 13,
+	      start_row: 11,
+	      oncreate: function($element, col, row) {
+	        /*$('<div class="_content"></div>').
+	          text(col + "," + row).
+	          appendTo($element).
+	          dblclick(function(e) {
+	            edit($(this));
+	          });*/
+	          $("#panel").css({"width":"300","height":"300"});
+
+
+	          $element.dblclick(function(e) {
+	          	//$(this).offset();
+	            console.log("double clicked"+ $(this).offset().top);
+	           	$("#panel").css({"top":$(this).offset().top,"left":$(this).offset().left});
+	           	$("#panel").fadeIn(10000);
+	           	$("#panel").addClass("visible");
+	           	$("#close").addClass("show");
+	          });
+	      }
+	    };
+
+
+
+	    $("#close").click(function(e){
+	    	$("#panel").removeClass("visible");
+	    	$(this).removeClass("show");
+	    });
+	    
+	    jQuery.infinitedrag("#demo2_wall", {}, tile_options);
+	  });
+
+
+	</script>
+</html>

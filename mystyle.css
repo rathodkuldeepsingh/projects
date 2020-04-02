@@ -1,0 +1,70 @@
+body
+{
+	margin:0;
+	overflow: hidden;
+}
+
+ #demo2_viewport {
+    overflow:hidden;
+    background-color:#000;
+    width:100%;
+    height:100%;
+    color:#fff;
+    background-color:#000;
+  }
+  #demo2_wall {
+  }
+    #demo2_wall ._tile {
+      font-size:18px;
+      font-weight:bold;
+      background-color:#000;
+      transition: background 0.8s ease;
+      border: white 1px solid;
+
+    }
+      #demo2_wall ._tile:hover {
+        background-color:#F57C00;
+        border: white 1px solid;
+      }
+      
+
+ #panel{
+ 	background:#F57C00;
+ 	position: absolute;
+ 	visibility: hidden;
+ 	
+ 	
+ }
+ #panel.visible{
+ 	visibility: visible;
+ 	top: 0 !important;
+ 	left: 0 !important;
+ 	height: 100vh !important;
+ 	width: 100vw !important;
+ 	transition: all 0.6s ease 0.2s;
+ }
+
+ #logo{
+ 	position: absolute;
+ 	top:2.5vh;
+ 	height: 5vh;
+ 	width: 10vh;
+ 	background:white;
+ 	left: 5vw;
+ 	z-index: 10;
+ }
+
+ #close{
+ 	position: absolute;
+ 	height: 5vh;
+ 	width: 5vh;
+ 	background:white;
+ 	top: 2.5vh;
+ 	right:5vw;
+ 	visibility: hidden;
+ 	cursor:pointer;
+ }
+ #close.show{
+ 	visibility: visible;
+ 	transition: all 0.3s ease 0.8s;
+ }
