@@ -15,8 +15,17 @@
 		<div id="close"></div>
 		
 
-		<div id="p1" class="project"></div>
-		<div id="p20" class="project"></div>
+		<div id="p1" class="project" title="Eyes">
+			<div id="one" class="eye">
+				<div id="ball"></div>
+			</div>
+			<div id="two" class="eye">
+				<div id="ball"></div>
+			</div>
+		</div>
+		<div id="p2" class="project">
+			<div id="glass"></div>
+		</div>
 		<div id="p25" class="project"></div>
 		<div id="p32" class="project"></div>
 		<div id="p4" class="project"></div>
@@ -53,20 +62,19 @@
 	      height: 300,
 	      start_col: 1,
 	      start_row: 1,
-	      oncreate: function($element, col, row) {
+	      oncreate: function($element, col, row){
 	        /*$('<div class="_content"></div>').
 	          text(col + "," + row).
 	          appendTo($element);
 			*/
-	          //coloring all aavailable projects
-	          $element.css("background",color(col,row));
 
+
+	          //coloring all available projects
+	          $element.css("background",color(col,row));
 	          $("#panel").css({"width":"300","height":"300"});
 
 
 	          $element.dblclick(function(e) {
-	          	//$(this).offset();
-	            //console.log("double clicked"+ $(this).offset().top);
 	           	$("#close").addClass("show");
 	           	open_panel(col,row,this);
 	          });
@@ -75,17 +83,35 @@
 
 
 
+	    var currentMousePos = { x: -1, y: -1 };
+	    $(document).mousemove(function(event) {
+	        currentMousePos.x = event.pageX;
+	        currentMousePos.y = event.pageY;
+
+	        var x=currentMousePos.x*100/window.innerWidth +"%";
+	  		var y=currentMousePos.y*100/window.innerHeight +"%";
+	  		var balls=$("#ball");
+	  		for (var i=0;i<2;i++)
+	  		{
+	  			ball[i].style.left=x;
+	  			ball[i].style.top=y;
+	  			ball[i].style.transform='translate(-'+x+', -'+y+')';
+	  			
+	  		}
+	    });
+
+
+
 
 	    function open_panel(col,row,e)
 	    {
-	    	var project_no= 15*(row-1)+col;
-	    	console.log(project_no);
-	    	if($("#p"+project_no).length)
-	    	{	
-	    		$("#p"+project_no).css({"top":$(e).offset().top,"left":$(e).offset().left});
-	           	$("#p"+project_no).fadeIn();
-	    		$("#p"+project_no).addClass("open");
-	    	}
+		    	var project_no= 15*(row-1)+col;
+		    	if($("#p"+project_no).length)
+		    	{	
+		    		$("#p"+project_no).css({"top":$(e).offset().top,"left":$(e).offset().left});
+		           	$("#p"+project_no).fadeIn();
+		    		$("#p"+project_no).addClass("open");
+		    	}
 
 	    }
 
@@ -93,16 +119,16 @@
 
 	    function color(col, row)
 	    {
-	    	var project_no= 15*(row-1)+col;
+		    	var project_no= 15*(row-1)+col;
 
-	    	if($("#p"+project_no).length)
-	    	{
-	    		return $("#p"+project_no).css("background");
-	    		console.log(project_no);
-	    	}
-	    	else{
-	    		return "#000";
-	    	}
+		    	if($("#p"+project_no).length)
+		    	{
+		    		return $("#p"+project_no).css("background");
+		    		console.log(project_no);
+		    	}
+		    	else{
+		    		return "#000";
+		    	}
 	    }
 
 	    //close
@@ -113,7 +139,23 @@
 	    });
 	    
 	    jQuery.infinitedrag("#demo2_wall", {}, tile_options);
+
+
+
+
+
+
+
+
+
+
 	  });
+
+
+
+
+
+
 
 
 	</script>
