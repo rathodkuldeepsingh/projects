@@ -3,8 +3,9 @@
 		<title>
 			MyHive
 		</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="mystyle.css">
 	</head>
 	<body>
@@ -12,14 +13,10 @@
  			<div id="demo2_wall"></div>
 		</div>
 		<div id="logo"></div>
-		<div id="close"></div>
-		
-
-		<div id="p1" class="project"></div>
-		<div id="p20" class="project"></div>
-		<div id="p25" class="project"></div>
-		<div id="p32" class="project"></div>
-		<div id="p4" class="project"></div>
+		<div id="panel">
+			
+			<div id="close"></div>
+		</div>
 	</body>
 	<script src="jquery.infinitedrag.js"></script>
 	<script type="text/javascript">
@@ -51,64 +48,33 @@
 	    var tile_options = {
 	      width: 300,
 	      height: 300,
-	      start_col: 1,
-	      start_row: 1,
+	      start_col: 13,
+	      start_row: 11,
 	      oncreate: function($element, col, row) {
 	        /*$('<div class="_content"></div>').
 	          text(col + "," + row).
-	          appendTo($element);
-			*/
-	          //coloring all aavailable projects
-	          $element.css("background",color(col,row));
-
+	          appendTo($element).
+	          dblclick(function(e) {
+	            edit($(this));
+	          });*/
 	          $("#panel").css({"width":"300","height":"300"});
 
 
 	          $element.dblclick(function(e) {
 	          	//$(this).offset();
-	            //console.log("double clicked"+ $(this).offset().top);
+	            console.log("double clicked"+ $(this).offset().top);
+	           	$("#panel").css({"top":$(this).offset().top,"left":$(this).offset().left});
+	           	$("#panel").fadeIn(10000);
+	           	$("#panel").addClass("visible");
 	           	$("#close").addClass("show");
-	           	open_panel(col,row,this);
 	          });
 	      }
 	    };
 
 
 
-
-	    function open_panel(col,row,e)
-	    {
-	    	var project_no= 15*(row-1)+col;
-	    	console.log(project_no);
-	    	if($("#p"+project_no).length)
-	    	{	
-	    		$("#p"+project_no).css({"top":$(e).offset().top,"left":$(e).offset().left});
-	           	$("#p"+project_no).fadeIn();
-	    		$("#p"+project_no).addClass("open");
-	    	}
-
-	    }
-
-
-
-	    function color(col, row)
-	    {
-	    	var project_no= 15*(row-1)+col;
-
-	    	if($("#p"+project_no).length)
-	    	{
-	    		return $("#p"+project_no).css("background");
-	    		console.log(project_no);
-	    	}
-	    	else{
-	    		return "#000";
-	    	}
-	    }
-
-	    //close
 	    $("#close").click(function(e){
-	    	$(".project").removeClass("open");
-	    	$(".project").css({"top":"","left":""});
+	    	$("#panel").removeClass("visible");
 	    	$(this).removeClass("show");
 	    });
 	    
